@@ -53,7 +53,13 @@
     <div class="row">
         <div class="col-12">
             <div class="receipe-slider owl-carousel">
+
+                {% if receita.foto_receita == '' %}
                 <img src="{% static 'img/bg-img/tomate_banner.jpg' %}">
+                {% else %}
+                <img src="{{ receita.foto_receita.url }}">
+                {% endif %}
+
             </div>
         </div>
     </div>
@@ -69,29 +75,48 @@
                     <span>{{receita.date_receita}}</span>
                     <h2>{{ receita.nome_receita }}</h2>
                     <div class="receipe-duration">
-                        <h6>Modo de Preparo: {{receita.modo_preparo}}</h6>
+
                         <h6>Tempo de Preparo: {{receita.tempo_preparo}}</h6>
                         <h6>Rendimento: {{receita.rendimento}}</h6>
                         <h6>{{receita.categoria}}</h6>
+                        <h6>Pessoa: {{receita.pessoa}}</h6>
                     </div>
                 </div>
+
             </div>
 
             <div class="row">
-              
 
-                <!-- Ingredientes -->
-                <div class="col-12 col-lg-4">
+
+
+                <!-- Modo de preparo -->
+                <div class="col-12 col-lg-8">
                     <div class="ingredients">
-                        <h4>Ingredientees</h4>
+
+                        <h4>Modo de Preparo</h4>
                         <div class="ingredients">
-                            <p>{{receita.ingredientes}}
-                            
+                            <p>{{receita.ingredientes}}</p>
+
                         </div>
                     </div>
                 </div>
+                <!-- Ingredientes -->
+                <div class="col-12 col-lg-4">
+                    <div class="ingredients">
+
+                        <h4>Ingredientes</h4>
+                        <div class="ingredients">
+
+                            <div class="ingredients">
+                                <p>{{receita.modo_preparo}}</p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-            <!-- Ingredientes -->
+
 
             <!-- ##### Footer Area Start ##### -->
             {% include 'partials/footer.html'%}
