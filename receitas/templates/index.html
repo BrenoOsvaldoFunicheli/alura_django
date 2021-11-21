@@ -17,7 +17,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-            
+
                 <form action="{% url 'buscar' %}">{% csrf_token %}
                     <input type="text" name="buscar" placeholder="O que está procurando...">
                     <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
@@ -43,11 +43,11 @@
 
                     {% comment %} # verificação de imagem {% endcomment %}
                     {% if receita.foto_receita == '' %}
-                        <img src="{% static 'img/bg-img/foto_receita.png' %}" alt="">
+                    <img src="{% static 'img/bg-img/foto_receita.png' %}" alt="">
                     {% else %}
-                        <img src="{{ receita.foto_receita.url }}" alt="">
+                    <img src="{{ receita.foto_receita.url }}" alt="">
                     {% endif %}
-                    
+
                     <div class="receipe-content">
                         <a href="{% url 'receita' receita.id %}">
                             <h5>{{ receita.nome_receita }}</h5>

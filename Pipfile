@@ -8,6 +8,7 @@ django = "*"
 pandas = "*"
 pylint-django = "*"
 pillow = "*"
+django-debug-toolbar = "*"
 
 [dev-packages]
 autopep8 = "*"

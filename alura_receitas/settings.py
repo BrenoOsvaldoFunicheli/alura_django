@@ -32,9 +32,15 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # debug
+    'debug_toolbar',
 
+    # alura
     "receitas",
     "pessoas",
+
+    # cart
+    "cart",
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -42,6 +48,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    
 ]
 
 MIDDLEWARE = [
@@ -52,6 +60,14 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    # debug toolbar
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+
+]
+
+INTERNAL_IPS=[
+    '127.0.0.1'
 ]
 
 ROOT_URLCONF = 'alura_receitas.urls'
