@@ -23,6 +23,7 @@ import debug_toolbar
 urlpatterns = [
     path('', include("receitas.urls")),
     path('', include("cart.urls")),
+    path('', include('usuarios.urls')),
     path('admin/', admin.site.urls),
     path('__debug__/', include(debug_toolbar.urls)),
 

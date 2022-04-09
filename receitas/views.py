@@ -28,6 +28,10 @@ def receita(request, id_receita):
 def http_request(request):
     return HttpResponse("<h1><h1>")
 
+
+from django.views.decorators.csrf import csrf_protect
+
+@csrf_protect
 def buscar(request):
 
     # todas as receitas

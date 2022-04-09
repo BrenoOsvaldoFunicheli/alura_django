@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+from email import message
 from pathlib import Path
 import os
 
@@ -38,6 +39,7 @@ INSTALLED_APPS = [
     # alura
     "receitas",
     "pessoas",
+    'usuarios',
 
     # cart
     "cart",
@@ -72,10 +74,19 @@ INTERNAL_IPS=[
 
 ROOT_URLCONF = 'alura_receitas.urls'
 
+
+def RELATIVE_PATH(*args):
+    return os.path.join(BASE_DIR, *args)
+
+TEMPLATE_DIRS = (
+    RELATIVE_PATH('template'),
+)
+
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -152,3 +163,10 @@ MEDIA_URL = '/media/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# messages tags
+from django.contrib.messages import constants as message
+MESSAGE_TAGS={
+    message.ERROR:'danger',
+    message.SUCCESS:'success',
+}
