@@ -2,12 +2,16 @@ from django.shortcuts import render, get_list_or_404, get_object_or_404, redirec
 from receitas.models import Receita
 from django.contrib.auth.models import User
 from django.contrib import auth, messages
+from  django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 def index(request):
-    receitas = Receita.objects.order_by('-date_receita').filter(publicado=True)
+    receitas = Receita.objects.order_by('-date_receita').filter(publicada=True)
+    paginator = Paginator(receitas, 6)
+    page = request.GET.get('page')
+    receitas_por_pagina = paginator.get_page(page)
 
     dados = {
-        'receitas' : receitas
+        'receitas' : receitas_por_pagina
     }
     return render(request,'receitas/index.html', dados)
 
@@ -21,7 +25,6 @@ def receita(request, receita_id):
     return render(request,'receitas/receita.html', receita_a_exibir)
 
 def cria_receita(request):
-    print(request)
     if request.method == 'POST':
         nome_receita = request.POST['nome_receita']
         ingredientes = request.POST['ingredientes']
@@ -35,7 +38,7 @@ def cria_receita(request):
         receita.save()
         return redirect('dashboard')
     else:
-        return render(request, 'receitas/criar_receita.html')
+        return render(request, 'receitas/cria_receita.html')
 
 def deleta_receita(request, receita_id):
     receita = get_object_or_404(Receita, pk=receita_id )
@@ -45,7 +48,7 @@ def deleta_receita(request, receita_id):
 def edita_receita(request, receita_id):
     receita = get_object_or_404(Receita, pk=receita_id)
     receita_a_editar = { 'receita':receita }
-    return render(request, 'receitas/editar_receita.html', receita_a_editar)
+    return render(request, 'receitas/edita_receita.html', receita_a_editar)
 
 def atualiza_receita(request):
     if request.method == 'POST':
